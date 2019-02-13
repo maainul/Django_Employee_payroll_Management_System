@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Employee
+from .models import Employee,Department,Section,Designation
 from django.http import HttpResponseRedirect
 from .forms import EmployeeForm
 from django.urls import reverse_lazy
@@ -20,7 +20,15 @@ def employee_create_view(request):
 
 def employee_list(request):
 	all_employee = Employee.objects.all()
-	context = {'all_employee':all_employee}
+	department = Department.objects.all()
+	section = Section.objects.all()
+	designation = Designation.objects.all()
+	context = {
+		'all_employee':all_employee,
+		'department':department,
+		'section':section,
+		'designation':designation
+		}
 	return render(request,'employee_list.html',context)
 
 
@@ -45,6 +53,30 @@ def employee_detail(request,id):
 
 
 
+def department_list(request):
+	department = Department.objects.all()
+	context = {
+		'department':department
+	}
+	return render(request,'department/department_list.html',context)
+
+
+
+def section_list(request):
+	section = Section.objects.all()
+	context = {
+		'section':section
+	}
+	return render(request,'section/section_list.html',context)
+
+
+
+def designation_list(request):
+	designation = Designation.objects.all()
+	context = {
+		'designation':designation
+	}
+	return render(request,'designation/designation_list.html',context)
 
 
 
@@ -52,6 +84,22 @@ def employee_detail(request,id):
 
 
 
+# class AuthorListView(ListView):
+#     model = Author
+#     context_object_name = 'book'
+
+
+# class AuthorCreateView(CreateView):
+#     model = Author
+#     fields = ('name', 'email', 'phone')
+#     success_url = reverse_lazy('author_list')
+
+
+# class AuthorUpdateView(UpdateView):
+#     model = Author
+#     form_class = AuthorForm
+#     template_name = 'book/author_update_form.html'
+#     success_url = reverse_lazy('author_list')
 
 
 

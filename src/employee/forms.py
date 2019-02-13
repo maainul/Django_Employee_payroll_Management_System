@@ -15,3 +15,8 @@ class EmployeeForm(forms.ModelForm):
 			'permanent_address',
 			'image',
 		]
+
+# class AuthorForm(forms.ModelForm):
+#     class Meta:
+#         model = Author
+#         fields = ('name', 'email', 'phone')
