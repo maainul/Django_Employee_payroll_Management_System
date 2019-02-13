@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<a href="{{ employee.get_absolute_url }}">
+    <img src="{% if employee.image %} {{ employee.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 130px; width: auto">
+</a>
+	<p>{{employee.name}}</p>
+	<p>{{employee.father_name}}</p>
+	<p>{{employee.mother_name}}</p>
+	<p>{{employee.nid}}</p>
+	<p>{{employee.phone}}</p>
+	<p>{{employee.present_address}}</p>
+	<p>{{employee.permanent_address}}</p>
+
+</body>
+</html>
