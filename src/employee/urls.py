@@ -23,7 +23,17 @@ urlpatterns = [
 
     re_path(r'^employee_list/(?P<id>\d+)/$', views.employee_detail, name='employee_detail'),
     #path('new/', views.get_name, name='get_name'),
-    path('create/', views.employee_create_view, name='employee_create_view'),
+    path('employee/create/', views.employee_create_view, name='employee_create_view'),
     path('<int:pk>/edit/', EmployeeUpdateView.as_view(), name='employee_update'),
    # path('<int:id>/edit/', views.employee_update, name='employee_update'),
+
+
+   path('department/create',views.department_create, name='department_create'),
+   path('department/',views.department_list, name='department_list'),
+
+   path('section/create',views.section_create, name='section_create'),
+   path('section/',views.section_list, name='section_list'),
+
+   path('designation/create',views.designation_create, name='designation_create'),
+   path('designation/',views.designation_list, name='designation_list'),
 ]

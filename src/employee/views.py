@@ -1,9 +1,64 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Employee,Department,Section,Designation
 from django.http import HttpResponseRedirect
-from .forms import EmployeeForm
+from .forms import EmployeeForm,DepartmentForm,SectionForm,DesignationForm
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
+
+def department_create(request):
+	form = DepartmentForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		form = DepartmentForm()
+	context = {
+		'form':form
+	}
+	return render(request,'department/department_create.html',context)
+
+
+def department_list(request):
+	department = Department.objects.all()
+	context = {
+		'department':department
+	}
+	return render(request,'department/department_list.html',context)
+
+def section_create(request):
+	form = SectionForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		form = DepartmentForm()
+	context = {
+		'form':form
+	}
+	return render(request,'section/section_create.html',context)
+
+
+def section_list(request):
+	section = Section.objects.all()
+	context = {
+		'section':section
+	}
+	return render(request,'section/section_list.html',context)
+
+
+def designation_create(request):
+	form = DesignationForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		form = DesignationForm()
+	context = {
+		'form':form
+	}
+	return render(request, 'designation/designation_create.html',context)
+
+
+def designation_list(request):
+	designation = Designation.objects.all()
+	context = {
+		'designation':designation
+	}
+	return render(request,'designation/designation_list.html',context)
 
 
 def employee_create_view(request):
@@ -11,7 +66,6 @@ def employee_create_view(request):
 	if form.is_valid():
 		form.save()
 		form = EmployeeForm()
-
 	context = {
 		'form':form
 	}
@@ -38,12 +92,6 @@ class EmployeeUpdateView(UpdateView):
 	template_name = 'employee_update.html'
 	success_url = reverse_lazy('employee_list')
 
-# class EmployeeListView(ListView):
-# 	model = Employee
-# 	context_object_name = 'employee'
-# 	success_url = reverse_lazy('employee_list')
-
-
 
 def employee_detail(request,id):
 	employee = get_object_or_404(Employee,id=id)
@@ -53,35 +101,57 @@ def employee_detail(request,id):
 
 
 
-def department_list(request):
-	department = Department.objects.all()
-	context = {
-		'department':department
-	}
-	return render(request,'department/department_list.html',context)
-
-
-
-def section_list(request):
-	section = Section.objects.all()
-	context = {
-		'section':section
-	}
-	return render(request,'section/section_list.html',context)
-
-
-
-def designation_list(request):
-	designation = Designation.objects.all()
-	context = {
-		'designation':designation
-	}
-	return render(request,'designation/designation_list.html',context)
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# class EmployeeListView(ListView):
+# 	model = Employee
+# 	context_object_name = 'employee'
+# 	success_url = reverse_lazy('employee_list')
 
 
 # class AuthorListView(ListView):
