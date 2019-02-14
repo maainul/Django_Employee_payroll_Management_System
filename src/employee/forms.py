@@ -14,6 +14,7 @@ class EmployeeForm(forms.ModelForm):
 			'present_address',
 			'permanent_address',
 			'image',
+			'name',
 		]
 class DepartmentForm(forms.ModelForm):
 	class Meta:

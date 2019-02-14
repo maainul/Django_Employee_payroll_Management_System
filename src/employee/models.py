@@ -1,29 +1,43 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models
 
 
 class Department(models.Model):
-	name = models.CharField(max_length=130)
+	name = models.CharField(max_length=50)
 	def __str__(self):
 		return self.name
 
 class Section(models.Model):
-	name = models.CharField(max_length=130)
+	name = models.CharField(max_length=50)
 	def __str__(self):
 		return self.name
 
 class Designation(models.Model):
-	name = models.CharField(max_length=130)
+	name = models.CharField(max_length=50)
 	def __str__(self):
 		return self.name
 
+class Team(models.Model):
+	name = models.CharField(max_length=10)
+
+class DepartmentAndDesignation(models.Model):
+	department_id  = models.ForeignKey(Department,on_delete=models.CASCADE,default=0,blank=True)
+	designation_id = models.ForeignKey(Designation,on_delete=models.CASCADE,default=0,blank=True)
+
+class DepartmentAndSection(models.Model):
+	department_id  = models.ForeignKey(Department,on_delete=models.CASCADE,default=0,blank=True)
+	section_id     = models.ForeignKey(Section,on_delete=models.CASCADE,default=0,blank=True)
+
+class SectionAndTeam(models.Model):
+	section_id     = models.ForeignKey(Section,on_delete=models.CASCADE,default=0,blank=True)
+	team_id        = models.ForeignKey(Team,on_delete=models.CASCADE,default=0,blank=True)
 
 class Employee(models.Model):
-	name 				= models.CharField(max_length=130)
-	father_name 		= models.CharField(max_length=130)
-	mother_name 		= models.CharField(max_length=130)
+	name 				= models.CharField(max_length=50)
+	father_name 		= models.CharField(max_length=50)
+	mother_name 		= models.CharField(max_length=50)
 	nid 				= models.IntegerField()
 	present_address 	= models.TextField(max_length=150)
 	permanent_address 	= models.TextField(max_length=150)
