@@ -25,6 +25,22 @@ def department_list(request):
 	}
 	return render(request,'department/department_list.html',context)
 
+
+def department_delete(request,id):
+	obj = get_object_or_404(Department,id=id)
+	if request.method == "POST":
+		obj.delete()
+		return redirect('department_list')
+	context = {
+		"objects":obj
+	}
+	return render(request,'department/department_detete.html',context)
+
+
+#
+# Section Site
+#
+
 def section_create(request):
 	form = SectionForm(request.POST or None)
 	if form.is_valid():
@@ -44,6 +60,20 @@ def section_list(request):
 	return render(request,'section/section_list.html',context)
 
 
+def section_delete(request,id):
+	obj = get_object_or_404(Section,id=id)
+	if request.method == "POST":
+		obj.delete()
+		return redirect('../')
+	context = {
+		"objects":obj
+	}
+	return render(request,'section/section_detete.html',context)
+
+#
+#Designation site
+#
+
 def designation_create(request):
 	form = DesignationForm(request.POST or None)
 	if form.is_valid():
@@ -62,6 +92,20 @@ def designation_list(request):
 	}
 	return render(request,'designation/designation_list.html',context)
 
+
+def designation_delete(request,id):
+	obj = get_object_or_404(Designation,id=id)
+	if request.method == "POST":
+		obj.delete()
+		return redirect('designation_list')
+	context = {
+		"objects":obj
+	}
+	return render(request,'designation/designation_detete.html',context)
+
+#
+# Employee site
+#
 
 def employee_create_view(request):
 	form = EmployeeForm(request.POST,request.FILES or None)
