@@ -8,16 +8,16 @@
 	<a href="{{ employee.get_absolute_url }}">
     <img src="{% if employee.image %} {{ employee.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 130px; width: auto">
 </a>
-	<h3>Employee Name: {{employee.name}}</h3>
-	<p>Father Name: {{employee.father_name}}</p>
-	<p>Mother Name: {{employee.mother_name}}</p>
-	<p>NID: {{employee.nid}}</p>
-	<p>Phone:{{employee.phone}}</p>
-	<p>Present: {{employee.present_address}}</p>
-	<p>Department :{{employee.department}}</p></p>
-	<p>Designation:{{employee.designation.designation_id.name }}</p>
-	<p>Section: {{employee.section.section_id.name }}
-	<p>Team: {{employee.team.team_id.name}}</p>
+	<h3>Employee Name: {{ employee.name }}</h3>
+	<p>Father Name: {{ employee.father_name }}</p>
+	<p>Mother Name: {{ employee.mother_name }}</p>
+	<p>NID: {{ employee.nid }}</p>
+	<p>Phone:{{ employee.phone }}</p>
+	<p>Present: {{ employee.present_address }}</p>
+	<p>Department :{{ employee.department }}</p></p>
+	<p>Designation:{{ employee.designation }}</p>
+	<p>Section: {{ employee.section }}
+	<p>Team: {{ employee.team }}</p>
 
 </body>
 </html>
