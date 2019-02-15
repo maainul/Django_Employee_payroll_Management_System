@@ -38,11 +38,11 @@ urlpatterns = [
 
    path('section/',views.section_list, name='section_list'),
    path('section/create',views.section_create, name='section_create'),
-   path('section/<int:id>/delete/', views.employee_delete, name='employee_delete'),
+   path('section/<int:id>/delete/', views.section_delete, name='section_delete'),
 
 
    path('designation/',views.designation_list, name='designation_list'),
    path('designation/create',views.designation_create, name='designation_create'),
-   path('designation/<int:id>/delete/', views.employee_delete, name='employee_delete'),
+   path('designation/<int:id>/delete/', views.designation_delete, name='designation_delete'),
 
 ]

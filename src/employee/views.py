@@ -34,7 +34,8 @@ def department_delete(request,id):
 	context = {
 		"objects":obj
 	}
-	return render(request,'department/department_detete.html',context)
+	#return render(request,'department/department_detete.html',context)
+	return render(request,'delete/delete.html',context)
 
 
 #
@@ -64,11 +65,13 @@ def section_delete(request,id):
 	obj = get_object_or_404(Section,id=id)
 	if request.method == "POST":
 		obj.delete()
-		return redirect('../')
+		return redirect('section_list')
 	context = {
 		"objects":obj
 	}
-	return render(request,'section/section_detete.html',context)
+	return render(request,'delete/delete.html',context)
+
+	#return render(request,'section/section_detete.html',context)
 
 #
 #Designation site
@@ -97,11 +100,14 @@ def designation_delete(request,id):
 	obj = get_object_or_404(Designation,id=id)
 	if request.method == "POST":
 		obj.delete()
-		return redirect('designation_list')
+		return redirect('../')
 	context = {
 		"objects":obj
 	}
-	return render(request,'designation/designation_detete.html',context)
+	return render(request,'delete/delete.html',context)
+
+	#return render(request,'designation/designation_delete.html',context)
+
 
 #
 # Employee site
@@ -153,7 +159,9 @@ def employee_delete(request,id):
 	context = {
 		"objects":obj
 	}
-	return render(request,'employee_detete.html',context)
+	return render(request,'delete/delete.html',context)
+
+	#return render(request,'employee_detete.html',context)
 
 
 # class EmployeeDeleteView(DeleteView):

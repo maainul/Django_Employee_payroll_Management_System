@@ -13,13 +13,14 @@ table, th, td {
 <table style="width:100%">
 
   <tr>
+    <th>ID</th>
     <th>name</th>
 
   </tr>
 {% for des in designation%}
     <tr>
     
-		
+		<td>{{des.id}}</td>
 		<td>{{des.name}}</td>
 	
 	</tr>

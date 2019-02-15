@@ -13,13 +13,14 @@ table, th, td {
 <table style="width:100%">
 
   <tr>
+    <th>ID</th>
     <th>name</th>
 
   </tr>
 {% for sec in section%}
     <tr>
     
-		
+		<td>{{sec.id}}</td>
 		<td>{{sec.name}}</td>
 	
 	</tr>
