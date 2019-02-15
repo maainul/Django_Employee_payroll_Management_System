@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.db.models import Manager
+from salary.models import Grade
+
 
 class Department(models.Model):
 	name = models.CharField(max_length=50)
@@ -73,6 +75,7 @@ class Employee(models.Model):
 	# section     			 = models.ForeignKey(DepartmentAndSection, on_delete=models.CASCADE,default=0,blank=True)
 	team 		             = models.ForeignKey(Team, on_delete=models.CASCADE,default=0,blank=True)
 	#team 		             = models.ForeignKey(SectionAndTeam, on_delete=models.CASCADE,default=0,blank=True)
+	grade					 = models.ForeignKey(Grade,on_delete=models.CASCADE,default=0)
 
 
 	class Meta:

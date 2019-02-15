@@ -1,5 +1,6 @@
 from django import forms
-from .models import Employee,Department,Section,Designation
+from .models import Employee,Department,Section,Designation,Grade
+
 
 
 class EmployeeForm(forms.ModelForm):
@@ -18,6 +19,7 @@ class EmployeeForm(forms.ModelForm):
 			'designation',
 			'section',
 			'team',
+			'grade',
 		]
 class DepartmentForm(forms.ModelForm):
 	class Meta:
