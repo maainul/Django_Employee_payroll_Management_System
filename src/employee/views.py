@@ -1,9 +1,11 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import Employee,Department,Section,Designation
 from django.http import HttpResponseRedirect
 from .forms import EmployeeForm,DepartmentForm,SectionForm,DesignationForm
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView,DeleteView
+from django.urls import reverse
+
 
 def department_create(request):
 	form = DepartmentForm(request.POST or None)
@@ -66,6 +68,7 @@ def employee_create_view(request):
 	if form.is_valid():
 		form.save()
 		form = EmployeeForm()
+		return redirect('../')
 	context = {
 		'form':form
 	}
@@ -98,8 +101,26 @@ def employee_detail(request,id):
 	context = {'employee':employee}
 	return render(request,'employee_details.html',context)
 
+def employee_delete(request,id):
+	obj = get_object_or_404(Employee,id=id)
+	if request.method == "POST":
+		obj.delete()
+		return redirect('employee_list')
+	context = {
+		"objects":obj
+	}
+	return render(request,'employee_detete.html',context)
 
 
+# class EmployeeDeleteView(DeleteView):
+# 	template_name = 'employee_detete.html'
+
+# 	def get_object(self):
+# 		id_ = self.kwargs.get("id")
+# 		return get_object_or_404(Employee,id = id_)
+
+# 	def get_success_url(self):
+# 		return reverse('employee_list')
 
 
 

@@ -10,7 +10,6 @@ from .models import (
 					SectionAndTeam
 				)
 
-
 admin.site.register(Employee)
 admin.site.register(Department)
 admin.site.register(Section)
