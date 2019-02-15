@@ -15,7 +15,7 @@ def department_create(request):
 	context = {
 		'form':form
 	}
-	return render(request,'department/department_create.html',context)
+	return render(request,'form/form.html',context)
 
 
 def department_list(request):
@@ -50,7 +50,7 @@ def section_create(request):
 	context = {
 		'form':form
 	}
-	return render(request,'section/section_create.html',context)
+	return render(request,'form/form.html',context)
 
 
 def section_list(request):
@@ -85,7 +85,7 @@ def designation_create(request):
 	context = {
 		'form':form
 	}
-	return render(request, 'designation/designation_create.html',context)
+	return render(request, 'form/form.html',context)
 
 
 def designation_list(request):
@@ -108,7 +108,6 @@ def designation_delete(request,id):
 
 	#return render(request,'designation/designation_delete.html',context)
 
-
 #
 # Employee site
 #
@@ -122,7 +121,7 @@ def employee_create_view(request):
 	context = {
 		'form':form
 	}
-	return render(request,'employee_create.html',context)
+	return render(request,'form/form.html',context)
 
 
 def employee_list(request):
