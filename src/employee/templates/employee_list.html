@@ -11,9 +11,50 @@ table, th, td {
 <body>
 
 <div>
-  <a href="create">create</a>
-  <br/>
-  <a href="1/edit">update</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'employee_list' %}">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'employee_list' %}">EmployeeList</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'employee_create_view' %}">employee_create_view</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'department_create' %}">department_create</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'department_list' %}">department_list</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'section_list' %}">section_list</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'section_create' %}">section_create</a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'designation_list' %}">designation_list</a>
+      </li>      
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'designation_create' %}">designation_create</a>
+      </li>      
+ 
+    </ul>
+      <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
 </div>
 <hr/>
 <table style="width:100%">
