@@ -1,0 +1,100 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+
+<table style="width:100%">
+
+  <tr>
+    <th>ID</th>
+    <th>name</th>
+    <th>Designation</th>
+    <th>Date</th>
+    <th>Status</th>
+
+  </tr>
+
+    <tr>
+		<td>sec.id</td>
+		<td>sec.name</td>
+    <td>Desig</td>
+    <td>date</td>
+    <td>A/P/L</td>
+	
+	</tr>
+
+</table>
+
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+<!-- 
+<div class="starter-template">
+  <div>
+    <div class='col-md-9'><h1>{{ event.name }}</h1></div>
+    <div class='col-md-3'><h1>{{ event.date_time }}</h1></div>
+  </div>
+  <div>
+    <div class='col-md-12'><h3>{{ event.description }}</h3> </div>
+  </div>
+</div>
+
+<br /><br />
+
+<div> -->
+  <div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save" />
+    </form>
+  </div>
+ <!--- /events/{{ event.id }}/--->
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+
+<table style="width:100%">
+
+  <tr>
+    <th>ID</th>
+    <th>name</th>
+
+  </tr>
+{% for emp in employee%}
+    <tr>
+    
+    
+    <td>{{emp.id}}</td>
+    <td>{{name.name}}</td>
+  
+  </tr>
+ {% endfor %}
+</table>
+
+</body>
+</html>
