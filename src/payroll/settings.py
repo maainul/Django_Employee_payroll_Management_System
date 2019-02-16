@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'employee',
     'salary',
-    'attendance',
 ]
 
 MIDDLEWARE = [
@@ -123,4 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # new added
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'employee/') 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'employee/')
