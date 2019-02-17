@@ -95,6 +95,12 @@ def designation_list(request):
 	}
 	return render(request,'designation/designation_list.html',context)
 
+# def designation_list(request):
+# 	request = check_designations(request)
+# 	return render(request,
+# 		"designation/designation_list.html",
+# 		{"designations":Designation.objects.all()})
+
 
 def designation_delete(request,id):
 	obj = get_object_or_404(Designation,id=id)
