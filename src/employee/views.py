@@ -173,7 +173,18 @@ def employee_delete(request,id):
 # 	def get_success_url(self):
 # 		return reverse('employee_list')
 
-
+def attendance_create(request):
+	all_employee = Employee.objects.all()
+	department = Department.objects.all()
+	section = Section.objects.all()
+	designation = Designation.objects.all()
+	context = {
+		'all_employee':all_employee,
+		'department':department,
+		'section':section,
+		'designation':designation
+		}
+	return render(request,'attendance/attendance_form.html',context)
 
 
 

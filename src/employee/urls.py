@@ -18,8 +18,10 @@ from employee.views import EmployeeUpdateView
 from django.contrib import admin
 from django.urls import path,re_path
 from . import views
+
+
 urlpatterns = [
-    path('',views.employee_list, name='employee_list'),
+    path('employee/',views.employee_list, name='employee_list'),
    # path('', EmployeeListView.as_view(), name='employee_list'),
     path('create/', views.employee_create_view, name='employee_create_view'),
     path('<int:id>/', views.employee_detail, name='employee_detail'),
@@ -44,5 +46,10 @@ urlpatterns = [
    path('designation/',views.designation_list, name='designation_list'),
    path('designation/create',views.designation_create, name='designation_create'),
    path('designation/<int:id>/delete/', views.designation_delete, name='designation_delete'),
+
+   path('attendance/',views.attendance_create, name='attendance_create'),
+   #path('designation/create',views.designation_create, name='designation_create'),
+   #path('designation/<int:id>/delete/', views.designation_delete, name='designation_delete'),
+
 
 ]

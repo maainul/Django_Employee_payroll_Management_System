@@ -1,5 +1,5 @@
 from django.db import models
-
+# from employee.models import Employee
 
 class Grade(models.Model):
 	name 				     = models.CharField(max_length=10)

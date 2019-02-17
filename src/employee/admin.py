@@ -5,6 +5,7 @@ from .models import (
 					Section,
 					Designation,
 					Team,
+					Attendance
 					#DepartmentAndDesignation,
 					#DepartmentAndSection,
 					#SectionAndTeam
@@ -15,7 +16,7 @@ admin.site.register(Department)
 admin.site.register(Section)
 admin.site.register(Designation)
 admin.site.register(Team)
-# admin.site.register(DepartmentAndDesignation)
+admin.site.register(Attendance)
 # admin.site.register(DepartmentAndSection)
 # admin.site.register(SectionAndTeam)
 

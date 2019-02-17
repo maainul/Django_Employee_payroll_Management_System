@@ -85,3 +85,11 @@ class Employee(models.Model):
 
 	def __str__(self):
 		return self.name
+
+
+class Attendance(models.Model):
+	employee  = models.ForeignKey(Employee, on_delete=models.CASCADE)
+	date      = models.DateTimeField(auto_now_add=True)
+	status 	  = models.CharField(max_length=7)
+	in_time   = models.TimeField(auto_now_add=True)
+	out_time  = models.TimeField()
