@@ -8,48 +8,49 @@ from salary.models import Grade
 
 class Department(models.Model):
 	dept_name = models.CharField(max_length=50)
-	class Meta:
-		verbose_name = _('department')
-        verbose_name_plural = _('departments')
-        db_table = 'departments'
-        ordering = ['id']
-
-    def __str__(self):
-        return self.dept_name
-
+    
+ #    class Meta:
+ #    	verbose_name = _('department')
+ #        verbose_name_plural = _('departments')
+ #        db_table = 'departments'
+ #        ordering = ['dept_no']
+	# def __str__(self):
+	# 	return self.dept_name
 
 class Section(models.Model):
 	section_name = models.CharField(max_length=50)
-	class Meta:
-		verbose_name = _('section')
-        verbose_name_plural = _('sections')
-        db_table = 'sections'
-        ordering = ['id']
-
-    def __str__(self):
-        return self.section_name
+	
+	# class Meta:
+	# 	verbose_name = _('section')
+ #    	verbose_name_plural= _('sections')
+ #    	db_table = 'sections'
+ #    	ordering = ['id']
+ #    def __str__(self):
+ #    	return self.section_name
 
 class Designation(models.Model):
 	designation_name = models.CharField(max_length=50)
-	class Meta:
-        verbose_name = _('designation')
-        verbose_name_plural = _('designations')
-        db_table = 'designations'
-        ordering = ['id']
+	
+	# class Meta:
+ #        verbose_name = _('designation')
+ #        verbose_name_plural = _('designations')
+ #        db_table = 'designations'
+ #        ordering = ['id']
 
-    def __str__(self):
-        return self.designation_name
+ #    def __str__(self):
+ #        return self.designation_name
 
 class Team(models.Model):
 	team_name = models.CharField(max_length=50)
-	class Meta:
-        verbose_name = _('team')
-        verbose_name_plural = _('teams')
-        db_table = 'teams'
-        ordering = ['id']
+	
+	# class Meta:
+ #        verbose_name = _('team')
+ #        verbose_name_plural = _('teams')
+ #        db_table = 'teams'
+ #        ordering = ['id']
 
-    def __str__(self):
-        return self.team_name
+ #    def __str__(self):
+ #        return self.team_name
 
 class Grade(models.Model):
 	grade_no = models.CharField(max_length=10,primary_key=True)
@@ -57,13 +58,13 @@ class Grade(models.Model):
 	medical_allowance = models.IntegerField()
 	lunch_allowance = models.IntegerField()
 	
-	class Meta:
-		verbose_name = _('grade')
-		verbose_name_plural= _('grades')
-		db_table = 'grades'
+	# class Meta:
+	# 	verbose_name = _('grade')
+	# 	verbose_name_plural= _('grades')
+	# 	db_table = 'grades'
 
-	def __str__(self):
-		return "{}".format(self.basic_salary)
+	# def __str__(self):
+	# 	return "{}".format(self.basic_salary)
 
 
 
@@ -76,63 +77,61 @@ class Employee(models.Model):
 	permanent_address 	     = models.TextField(max_length=150)
 	phone 				     = models.IntegerField()
 	image         		     = models.ImageField(upload_to='employee/%Y/%m/%d', blank=True)
-    class Meta:
-        verbose_name = _('employee')
-        verbose_name_plural = _('employees')
-        db_table = 'employees'
+    # class Meta:
+    #     verbose_name = _('employee')
+    #     verbose_name_plural = _('employees')
+    #     db_table = 'employees'
 
-    def __str__(self):
-        return "{}".format(self.name)
+    # def __str__(self):
+    #     return "{}".format(self.name)
 
 
 class EmployeeDepartment(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no', verbose_name=_('department'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no')
+    # class Meta:
+    #     verbose_name = _('department employee')
+    #     verbose_name_plural = _('department employees')
+    #     db_table = 'employeedepartments'
 
-
-    class Meta:
-        verbose_name = _('department employee')
-        verbose_name_plural = _('department employees')
-        db_table = 'employeedepartments'
-
-    def __str__(self):
-        return "{} - {}".format(self.employee, self.department)
+    # def __str__(self):
+    #     return "{} - {}".format(self.employee, self.department)
 
 
 class EmployeeSection(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
-    section = models.ForeignKey(Section, on_delete=models.CASCADE, db_column='section_no', verbose_name=_('section'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, db_column='section_no')
 
 
-    class Meta:
-        verbose_name = _(' sectionemployee')
-        verbose_name_plural = _('sectionemployees')
-        db_table = 'sectionemployees'
+    # class Meta:
+    #     verbose_name = _(' sectionemployee')
+    #     verbose_name_plural = _('sectionemployees')
+    #     db_table = 'sectionemployees'
 
-    def __str__(self):
-        return "{} - {}".format(self.employee, self.section)
+    # def __str__(self):
+    #     return "{} - {}".format(self.employee, self.section)
 
 
 class EmployeeDesignation(models.Model):
-    employee    = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
-    designation = models.ForeignKey(Designation, on_delete=models.CASCADE, db_column='designation_no', verbose_name=_('designation'))
+    employee    = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+    designation = models.ForeignKey(Designation, on_delete=models.CASCADE, db_column='designation_no')
 
 
-    class Meta:
-        verbose_name = _('employeedesignation')
-        verbose_name_plural = _('employeedesignations')
-        db_table = 'employeedesignations'
+    # class Meta:
+    #     verbose_name = _('employeedesignation')
+    #     verbose_name_plural = _('employeedesignations')
+    #     db_table = 'employeedesignations'
 
-    def __str__(self):
-        return "{} - {}".format(self.employee, self.designation_name)
+    # def __str__(self):
+    #     return "{} - {}".format(self.employee, self.designation_name)
 
 
 
 class Salary(models.Model):
-    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
-    grade     = models.ForeignKey(Grade, on_delete=models.CASCADE, db_column='grade_no', verbose_name=_('grade'))
-    from_date = models.DateField(_('from'))
-    to_date   = models.DateField(_('to'))
+    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+    grade     = models.ForeignKey(Grade, on_delete=models.CASCADE, db_column='grade_no')
+    from_date = models.DateField(('from'))
+    to_date   = models.DateField(('to'))
 
 
  #    def net_salary(basic_salary,medical_allowance,lunch_allowance):
@@ -140,14 +139,14 @@ class Salary(models.Model):
 	# 	 return wages
 	# wages = models.IntegerField()
 	
-    class Meta:
-        db_table = 'salaries'
-        ordering = ['-from_date']
-        verbose_name = _('salary')
-        verbose_name_plural = _('salaries')
+    # class Meta:
+    #     db_table = 'salaries'
+    #     ordering = ['-from_date']
+    #     verbose_name = _('salary')
+    #     verbose_name_plural = _('salaries')
 
-    def __str__(self):
-        return "{} - {}".format(self.employee, self.grade)
+    # def __str__(self):
+    #     return "{} - {}".format(self.employee, self.grade)
 
 
 

@@ -1,18 +1,17 @@
 from django import forms
 #from .models import Employee,Department,Section,Designation,Grade
-from .model import (
-			Department
-			Section
-			Designation
-			Team
-			Grade
-			Employee
-			EmployeeDepartment
-			EmployeeSection
-			EmployeeDesignation
-			Salary
-			)
-
+from .models import (
+			Department,
+			Section,
+			Designation,
+			Team,
+			Grade,
+			Employee,
+			EmployeeDepartment,
+			EmployeeSection,
+			EmployeeDesignation,
+			Salary,
+		)
 class EmployeeForm(forms.ModelForm):
 	class Meta:
 		model = Employee

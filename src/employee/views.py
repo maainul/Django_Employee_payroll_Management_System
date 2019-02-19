@@ -1,15 +1,15 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import (
-			Department
-			Section
-			Designation
-			Team
-			Grade
-			Employee
-			EmployeeDepartment
-			EmployeeSection
-			EmployeeDesignation
-			Salary
+			Department,
+			Section,
+			Designation,
+			Team,
+			Grade,
+			Employee,
+			EmployeeDepartment,
+			EmployeeSection,
+			EmployeeDesignation,
+			Salary,
 		)
 from django.http import HttpResponseRedirect
 from .forms import EmployeeForm,DepartmentForm,SectionForm,DesignationForm
@@ -46,6 +46,41 @@ def department_delete(request,id):
 		"objects":obj
 	}
 	#return render(request,'department/department_detete.html',context)
+	return render(request,'delete/delete.html',context)
+
+
+#
+# Team 
+#
+
+def team_create(request):
+	form = DepartmentForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		form = DepartmentForm()
+	context = {
+		'form':form
+	}
+	return render(request,'form/form.html',context)
+
+
+def team_list(request):
+	team = Department.objects.all()
+	context = {
+		'team':team
+	}
+	return render(request,'team/department_list.html',context)
+
+
+def team_delete(request,id):
+	obj = get_object_or_404(Department,id=id)
+	if request.method == "POST":
+		obj.delete()
+		return redirect('department_list')
+	context = {
+		"objects":obj
+	}
+	#return render(request,'team/department_detete.html',context)
 	return render(request,'delete/delete.html',context)
 
 
