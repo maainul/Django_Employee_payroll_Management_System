@@ -8,7 +8,77 @@ from salary.models import Grade
 
 class Department(models.Model):
 	dept_name = models.CharField(max_length=50)
-    
+	
+	def __str__(self):
+		return self.dept_name
+
+class Section(models.Model):
+	section_name = models.CharField(max_length=50)
+	
+	def __str__(self):
+		return self.section_name 
+
+class Designation(models.Model):
+	designation_name = models.CharField(max_length=50)
+
+	def __str__(self):
+		return self.designation_name 
+
+class Team(models.Model):
+	team_name = models.CharField(max_length=50)
+	
+	def __str__(self):
+		return self.team_name
+
+class Grade(models.Model):
+	grade_no = models.CharField(max_length=10,primary_key=True)
+	basic_salary = models.IntegerField()
+	medical_allowance = models.IntegerField()
+	lunch_allowance = models.IntegerField()
+	
+	def __str__(self):
+		return self.basic_salary
+
+class Employee(models.Model):
+	name 				     = models.CharField(max_length=50)
+	father_name 		     = models.CharField(max_length=50)
+	mother_name 		     = models.CharField(max_length=50)
+	nid 				     = models.IntegerField()
+	present_address 	     = models.TextField(max_length=150)
+	permanent_address 	     = models.TextField(max_length=150)
+	phone 				     = models.IntegerField()
+	image         		     = models.ImageField(upload_to='employee/%Y/%m/%d', blank=True)
+	department 			     = models.ForeignKey(Department, on_delete=models.CASCADE,default=0,blank=True)
+	designation              = models.ForeignKey(Designation, on_delete=models.CASCADE,default=0,blank=True)
+	section     			 = models.ForeignKey(Section, on_delete=models.CASCADE,default=0,blank=True)
+	def __str__(self):
+		return self.name
+
+
+class Salary(models.Model):
+    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+    grade     = models.ForeignKey(Grade, on_delete=models.CASCADE, db_column='grade_no')
+    from_date = models.DateField(('from'))
+    to_date   = models.DateField(('to'))
+    def __str__(self):
+    	return self.grade
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  #    class Meta:
  #    	verbose_name = _('department')
  #        verbose_name_plural = _('departments')
@@ -17,8 +87,17 @@ class Department(models.Model):
 	# def __str__(self):
 	# 	return self.dept_name
 
-class Section(models.Model):
-	section_name = models.CharField(max_length=50)
+	# validation logic
+    # def clean(self):
+    #     # Don't allow 'San Diego' city entries that have state different than 'CA'
+    #     if self.city == 'San Diego' and self.state != 'CA':
+    #     	raise ValidationError('Wait San Diego is CA!, are you sure there is another San Diego in %s ?' % self.state)
+    
+    # def latitude_longitude(self):
+    #     # Call remote service to get latitude & longitude
+    #     latitude, longitude = geocoding_method(self.address, self.city, self.state)
+    #     return latitude, longitude
+
 	
 	# class Meta:
 	# 	verbose_name = _('section')
@@ -28,8 +107,7 @@ class Section(models.Model):
  #    def __str__(self):
  #    	return self.section_name
 
-class Designation(models.Model):
-	designation_name = models.CharField(max_length=50)
+
 	
 	# class Meta:
  #        verbose_name = _('designation')
@@ -40,8 +118,7 @@ class Designation(models.Model):
  #    def __str__(self):
  #        return self.designation_name
 
-class Team(models.Model):
-	team_name = models.CharField(max_length=50)
+
 	
 	# class Meta:
  #        verbose_name = _('team')
@@ -52,11 +129,7 @@ class Team(models.Model):
  #    def __str__(self):
  #        return self.team_name
 
-class Grade(models.Model):
-	grade_no = models.CharField(max_length=10,primary_key=True)
-	basic_salary = models.IntegerField()
-	medical_allowance = models.IntegerField()
-	lunch_allowance = models.IntegerField()
+
 	
 	# class Meta:
 	# 	verbose_name = _('grade')
@@ -68,15 +141,7 @@ class Grade(models.Model):
 
 
 
-class Employee(models.Model):
-	name 				     = models.CharField(max_length=50)
-	father_name 		     = models.CharField(max_length=50)
-	mother_name 		     = models.CharField(max_length=50)
-	nid 				     = models.IntegerField()
-	present_address 	     = models.TextField(max_length=150)
-	permanent_address 	     = models.TextField(max_length=150)
-	phone 				     = models.IntegerField()
-	image         		     = models.ImageField(upload_to='employee/%Y/%m/%d', blank=True)
+
     # class Meta:
     #     verbose_name = _('employee')
     #     verbose_name_plural = _('employees')
@@ -85,10 +150,11 @@ class Employee(models.Model):
     # def __str__(self):
     #     return "{}".format(self.name)
 
-
-class EmployeeDepartment(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no')
+ # employee -----> Employee
+ # deparment ------> department
+# class EmployeeDepartment(models.Model):
+#     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+#     department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no')
     # class Meta:
     #     verbose_name = _('department employee')
     #     verbose_name_plural = _('department employees')
@@ -98,9 +164,9 @@ class EmployeeDepartment(models.Model):
     #     return "{} - {}".format(self.employee, self.department)
 
 
-class EmployeeSection(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
-    section = models.ForeignKey(Section, on_delete=models.CASCADE, db_column='section_no')
+# class EmployeeSection(models.Model):
+#     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+#     section = models.ForeignKey(Section, on_delete=models.CASCADE, db_column='section_no')
 
 
     # class Meta:
@@ -112,9 +178,9 @@ class EmployeeSection(models.Model):
     #     return "{} - {}".format(self.employee, self.section)
 
 
-class EmployeeDesignation(models.Model):
-    employee    = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
-    designation = models.ForeignKey(Designation, on_delete=models.CASCADE, db_column='designation_no')
+# class EmployeeDesignation(models.Model):
+#     employee    = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+#     designation = models.ForeignKey(Designation, on_delete=models.CASCADE, db_column='designation_no')
 
 
     # class Meta:
@@ -127,11 +193,6 @@ class EmployeeDesignation(models.Model):
 
 
 
-class Salary(models.Model):
-    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
-    grade     = models.ForeignKey(Grade, on_delete=models.CASCADE, db_column='grade_no')
-    from_date = models.DateField(('from'))
-    to_date   = models.DateField(('to'))
 
 
  #    def net_salary(basic_salary,medical_allowance,lunch_allowance):
@@ -164,9 +225,7 @@ class Salary(models.Model):
 	# # departmentanddesignation = models.ForeignKey(DepartmentAndDesignation, on_delete=models.CASCADE,default=0,blank=True)
 	# # departmentandsection     = models.ForeignKey(DepartmentAndSection, on_delete=models.CASCADE,default=0,blank=True)
 	# # sectionandteam 		   = models.ForeignKey(SectionAndTeam, on_delete=models.CASCADE,default=0,blank=True)
-	# # department 			   = models.ForeignKey(Department, on_delete=models.CASCADE,default=0,blank=True)
-	# # designation              = models.ForeignKey(DepartmentAndDesignation, on_delete=models.CASCADE,default=0,blank=True)
-	# # section     			 = models.ForeignKey(DepartmentAndSection, on_delete=models.CASCADE,default=0,blank=True)
+	
 	# team 		             = models.ForeignKey(Team, on_delete=models.CASCADE,default=0,blank=True)
 	# #team 		             = models.ForeignKey(SectionAndTeam, on_delete=models.CASCADE,default=0,blank=True)
 	# grade					 = models.ForeignKey(Grade,on_delete=models.CASCADE,default=0)

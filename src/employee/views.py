@@ -6,9 +6,9 @@ from .models import (
 			Team,
 			Grade,
 			Employee,
-			EmployeeDepartment,
-			EmployeeSection,
-			EmployeeDesignation,
+			# EmployeeDepartment,
+			# EmployeeSection,
+			# EmployeeDesignation,
 			Salary,
 		)
 from django.http import HttpResponseRedirect
