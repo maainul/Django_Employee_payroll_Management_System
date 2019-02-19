@@ -1,7 +1,17 @@
 from django import forms
-from .models import Employee,Department,Section,Designation,Grade
-
-
+#from .models import Employee,Department,Section,Designation,Grade
+from .model import (
+			Department
+			Section
+			Designation
+			Team
+			Grade
+			Employee
+			EmployeeDepartment
+			EmployeeSection
+			EmployeeDesignation
+			Salary
+			)
 
 class EmployeeForm(forms.ModelForm):
 	class Meta:
@@ -15,28 +25,28 @@ class EmployeeForm(forms.ModelForm):
 			'present_address',
 			'permanent_address',
 			'image',
-			'department',
-			'designation',
-			'section',
-			'team',
-			'grade',
 		]
 class DepartmentForm(forms.ModelForm):
 	class Meta:
 		model = Department
-		fields = ('name',)
+		fields = ('dept_name',)
 
 class SectionForm(forms.ModelForm):
 	class Meta:
 		model = Section
-		fields = ('name',)
+		fields = ('section_name',)
 
 class DesignationForm(forms.ModelForm):
 	class Meta:
 		model = Designation
-		fields = ('name',)
+		fields = ('designation_name',)
+class TeamForm(forms.ModelForm):
+	class Meta:
+		model = Team
+		fields = ('team_name',)
 
-# class AuthorForm(forms.ModelForm):
-#     class Meta:
-#         model = Author
-#         fields = ('name', 'email', 'phone')
+class GradeForm(forms.ModelForm):
+	class Meta:
+		model = Grade
+		fields = ('grade_no','basic_salary','medical_allowance','lunch_allowance',)
+

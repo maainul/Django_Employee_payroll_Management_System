@@ -1,5 +1,16 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import Employee,Department,Section,Designation
+from .models import (
+			Department
+			Section
+			Designation
+			Team
+			Grade
+			Employee
+			EmployeeDepartment
+			EmployeeSection
+			EmployeeDesignation
+			Salary
+		)
 from django.http import HttpResponseRedirect
 from .forms import EmployeeForm,DepartmentForm,SectionForm,DesignationForm
 from django.urls import reverse_lazy
@@ -95,12 +106,6 @@ def designation_list(request):
 	}
 	return render(request,'designation/designation_list.html',context)
 
-# def designation_list(request):
-# 	request = check_designations(request)
-# 	return render(request,
-# 		"designation/designation_list.html",
-# 		{"designations":Designation.objects.all()})
-
 
 def designation_delete(request,id):
 	obj = get_object_or_404(Designation,id=id)
@@ -178,21 +183,6 @@ def employee_delete(request,id):
 
 # 	def get_success_url(self):
 # 		return reverse('employee_list')
-
-def attendance_create(request):
-	all_employee = Employee.objects.all()
-	department = Department.objects.all()
-	section = Section.objects.all()
-	designation = Designation.objects.all()
-	context = {
-		'all_employee':all_employee,
-		'department':department,
-		'section':section,
-		'designation':designation
-		}
-	return render(request,'attendance/attendance_form.html',context)
-
-
 
 
 

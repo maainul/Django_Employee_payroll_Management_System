@@ -27,7 +27,7 @@ class Section(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return self.dept_name
+        return self.section_name
 
 class Designation(models.Model):
 	designation_name = models.CharField(max_length=50)
@@ -86,8 +86,8 @@ class Employee(models.Model):
 
 
 class EmployeeDepartment(models.Model):
-    employee = models.ForeignKey('Employee', on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
-    department = models.ForeignKey('Department', on_delete=models.CASCADE, db_column='dept_no', verbose_name=_('department'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no', verbose_name=_('department'))
 
 
     class Meta:
@@ -100,8 +100,8 @@ class EmployeeDepartment(models.Model):
 
 
 class EmployeeSection(models.Model):
-    employee = models.ForeignKey('Employee', on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
-    section = models.ForeignKey('Section', on_delete=models.CASCADE, db_column='section_no', verbose_name=_('section'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, db_column='section_no', verbose_name=_('section'))
 
 
     class Meta:
