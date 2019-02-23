@@ -6,6 +6,12 @@ from django.db.models import Manager
 from salary.models import Grade
 
 
+ATTENDANCE_STATUS = (
+		('A','Absent'),
+		('P','Present'),
+		('L','Leave'),
+		)
+
 class Department(models.Model):
 	dept_name = models.CharField(max_length=50)
 	
@@ -64,15 +70,22 @@ class Salary(models.Model):
     	return self.grade
 
 
+class Attendance(models.Model):
+    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+    date = models.DateField(('attendance_date'))
+    attendance_status = models.CharField(choices=ATTENDANCE_STATUS,max_length=1)	
+
+	#attendance_status = models.CharField(choices=ATTENDANCE_STATUS,max_length=1)
 
 
+# class Category(models.Model):
+#     name = models.CharField(max_length=30)
+    
 
-
-
-
-
-
-
+# class Product(models.Model):
+#     name = models.CharField(max_length=30)
+#     price = models.DecimalField(decimal_places=2, max_digits=10)
+#     category = models.ForeignKey(Category)
 
 
 

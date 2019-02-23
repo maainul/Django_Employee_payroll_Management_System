@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from employee.views import EmployeeUpdateView
+#from employee.views import EmployeeUpdateView
 #from employee.views import EmployeeDeleteView
 from django.contrib import admin
 from django.urls import path,re_path
@@ -23,13 +23,16 @@ from . import views
 urlpatterns = [
 
   path('employee/',views.employee_list, name='employee_list'),
+  path('attendance/',views.attendance_list, name='attendance_list'),
    # path('', EmployeeListView.as_view(), name='employee_list'),
+  #path('a/', views.add_agent, name='add_agent'),
   path('create/', views.employee_create_view, name='employee_create_view'),
   path('<int:id>/', views.employee_detail, name='employee_detail'),
+ # path('<int:id>/edit/', views.employee_edit, name='employee_edit'),
     #re_path(r'^employee_list/(?P<id>\d+)/$', views.employee_detail, name='employee_detail'),
     #path('new/', views.get_name, name='get_name'),
     
-    #path('<int:id>/edit/', EmployeeUpdateView.as_view(), name='employee_update'),
+  #path('<int:id>/edit/', EmployeeUpdateView.as_view(), name='employee_update'),
     #path('<int:id>/delete/', EmployeeDeleteView.as_view(), name='employee_delete'),
   path('<int:id>/delete/', views.employee_delete, name='employee_delete'),
    # path('<int:id>/edit/', views.employee_update, name='employee_update'),

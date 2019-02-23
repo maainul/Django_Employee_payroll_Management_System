@@ -6,9 +6,6 @@ from .models import (
 			Team,
 			Grade,
 			Employee,
-			# EmployeeDepartment,
-			# EmployeeSection,
-			# EmployeeDesignation,
 			Salary,
 		)
 from django.http import HttpResponseRedirect
@@ -158,37 +155,50 @@ def designation_delete(request,id):
 # Employee site
 #
 
+# def employee_create_view(request):
+# 	form = EmployeeForm(request.POST,request.FILES or None)
+# 	if form.is_valid():
+# 		form.save()
+# 		form = EmployeeForm()
+# 		return redirect('../')
+# 	context = {
+# 		'form':form
+# 	}
+# 	return render(request,'form/form.html',context)
+
 def employee_create_view(request):
-	form = EmployeeForm(request.POST,request.FILES or None)
-	if form.is_valid():
-		form.save()
-		form = EmployeeForm()
-		return redirect('../')
-	context = {
-		'form':form
-	}
-	return render(request,'form/form.html',context)
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            employee = form.save(commit=False)
+            # employee.user = request.user
+            employee.save()
+            return redirect('employee_list')
+    else:
+        form = EmployeeForm()
+    return render(request, 'form/form.html', {'form': form})
+
 
 
 def employee_list(request):
 	all_employee = Employee.objects.all()
-	department = Department.objects.all()
-	section = Section.objects.all()
-	designation = Designation.objects.all()
+	# department = Department.objects.all()
+	# section = Section.objects.all()
+	# designation = Designation.objects.all()
 	context = {
 		'all_employee':all_employee,
-		'department':department,
-		'section':section,
-		'designation':designation
+		# 'department':department,
+		# 'section':section,
+		# 'designation':designation
 		}
 	return render(request,'employee_list.html',context)
 
 
-class EmployeeUpdateView(UpdateView):
-	model = Employee
-	form_class = EmployeeForm
-	template_name = 'employee_update.html'
-	success_url = reverse_lazy('employee_list')
+# class EmployeeUpdateView(UpdateView):
+# 	model = Employee
+# 	form_class = EmployeeForm
+# 	template_name = 'employee_update.html'
+# 	success_url = reverse_lazy('employee_list')
 
 
 def employee_detail(request,id):
@@ -220,18 +230,42 @@ def employee_delete(request,id):
 # 		return reverse('employee_list')
 
 
+# def employee_edit(request):
+#     EmployeeFormSet = modelformset_factory(Product,
+# 		fields = (
+#         	'name',
+# 			'father_name',
+# 			'mother_name',
+# 			'nid',
+# 			'phone',
+# 			'present_address',
+# 			'permanent_address',
+# 			'department',
+# 			'designation',
+# 			'section' ),extra=0)
 
+#     data = request.POST or None
+#     formset = EmployeeFormSet(data=data, queryset=Employee.objects.filter())
+#     for form in formset:
+#         form.fields['department'].queryset  = Department.objects.filter()
+#     for form in formset:
+#         form.fields['designation'].queryset = Designation.objects.filter()
+#     for form in formset:
+#         form.fields['department'].queryset  = Section.objects.filter()
+#     for form in formset:
+#         form.fields['department'].queryset  = Team.objects.filter()    
 
+#     if request.method == 'POST' and formset.is_valid():
+#         formset.save()
+#         return redirect('employee_list')
 
-
-
-
-
-
-
-
-
-
+#     return render(request, 'form/form.html', {'formset': formset})
+def attendance_list(request):
+	all_employee = Employee.objects.all()
+	context = {
+		'all_employee':all_employee
+		}
+	return render(request,'attendance/attendance_list.html',context)
 
 
 

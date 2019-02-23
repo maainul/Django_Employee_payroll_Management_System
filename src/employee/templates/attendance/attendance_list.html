@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+
+
+<table style="width:100%">
+
+  <tr>
+    <th>Firstname</th>
+    <th>Phone</th>
+    <th>Address</th>
+    <th>status</th>
+  </tr>
+{% for employee in all_employee%}
+    <tr>
+      <td><a href="{% url 'employee_detail' employee.pk %}">{{ employee.name }}</a></td>
+    
+    <td>{{employee.phone}}</td>
+    <td>{{employee.designation}}</td>
+<td>
+    <select name="status">
+    <option value="present">P</option>
+    <option value="absent">A</option>
+    <option value="leave">L</option>
+
+  </select>
+</td>
+
+  </tr>
+ {% endfor %}
+   <input type="submit">
+</table>
+
+</body>
+</html>

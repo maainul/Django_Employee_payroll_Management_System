@@ -1,0 +1,7 @@
+{% if not agents_details %}
+         <form action="" method="POST" enctype="multipart/form-data">
+             {% csrf_token %}
+             <table> {{ agent_form }} </table>
+             <input type="submit" value="insert">
+         </form>
+     {% endif %}
