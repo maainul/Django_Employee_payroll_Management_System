@@ -1,14 +1,37 @@
 from django import forms
 from .models import (
 			Department,
-			Section,
+			#Section,
 			Designation,
-			Team,
-			Grade,
+			#Team,
+			#Grade,
 			Employee,
 			#Attendance,
-			Salary,
+			#Salary,
 		)
+
+#from django import forms
+#from .models import Employee, Designation
+
+#from django import forms
+
+class EmployeeForm(forms.ModelForm):
+    class Meta:
+        model = Employee
+        fields = ('name', 'birthdate', 'department', 'designation')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['designation'].queryset = Designation.objects.none()
+
+        if 'department' in self.data:
+            try:
+                department_id = int(self.data.get('department'))
+                self.fields['designation'].queryset = Designation.objects.filter(department_id=department_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty Designation queryset
+        elif self.instance.pk:
+            self.fields['designation'].queryset = self.instance.department.designation_set.order_by('name')
 # class EmployeeForm(forms.ModelForm):
 # 	class Meta:
 # 		model = Employee
@@ -29,23 +52,23 @@ from .models import (
 
 
 
-class EmployeeForm(forms.ModelForm):
-    class Meta:
-        model = Employee
-        fields = (
-        	'name',
-			'father_name',
-			'mother_name',
-			'nid',
-			'phone',
-			'present_address',
-			'permanent_address',
-			'department',
-			'designation',
-			'section' )
+# class EmployeeForm(forms.ModelForm):
+#     class Meta:
+#         model = Employee
+#         fields = (
+#         	'name',
+# 			'father_name',
+# 			'mother_name',
+# 			'nid',
+# 			'phone',
+# 			'present_address',
+# 			'permanent_address',
+# 			'department',
+# 			'designation',
+# 			'section' )
 
-        def __init__(self,*args,**kwargs):
-        	super(EmployeeForm,self).__init__(*args,**kwargs)
+#         def __init__(self,*args,**kwargs):
+#         	super(EmployeeForm,self).__init__(*args,**kwargs)
         	
 
 # def __init__(self,*args,**kwargs):
@@ -68,30 +91,30 @@ class EmployeeForm(forms.ModelForm):
       #     	raise forms.ValidationError("Please don't use a hotmail email, we simply don't like it",code='hotmail')
       #     # Always return
 
-class DepartmentForm(forms.ModelForm):
-	class Meta:
-		model = Department
-		fields = ('dept_name',)
+# class DepartmentForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Department
+# 		fields = ('dept_name',)
 
-class SectionForm(forms.ModelForm):
-	class Meta:
-		model = Section
-		fields = ('section_name',)
+# class SectionForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Section
+# 		fields = ('section_name',)
 
-class DesignationForm(forms.ModelForm):
-	class Meta:
-		model = Designation
-		fields = ('designation_name',)
+# class DesignationForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Designation
+# 		fields = ('designation_name',)
 
-class TeamForm(forms.ModelForm):
-	class Meta:
-		model = Team
-		fields = ('team_name',)
+# class TeamForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Team
+# 		fields = ('team_name',)
 
-class GradeForm(forms.ModelForm):
-	class Meta:
-		model = Grade
-		fields = ('grade_no','basic_salary','medical_allowance','lunch_allowance',)
+# class GradeForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Grade
+# 		fields = ('grade_no','basic_salary','medical_allowance','lunch_allowance',)
 
 
 # class AttendanceForm(forms.ModelForm):

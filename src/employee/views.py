@@ -1,153 +1,175 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import (
 			Department,
-			Section,
+			#Section,
 			Designation,
-			Team,
-			Grade,
+			#Team,
+			#Grade,
 			Employee,
-			Salary,
+			#Salary,
 		)
-from django.http import HttpResponseRedirect
-from .forms import EmployeeForm,DepartmentForm,SectionForm,DesignationForm
+from django.shortcuts import render
+from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView,DeleteView
-from django.urls import reverse
+from .models import Employee, Designation
+from .forms import EmployeeForm
 
 
-def department_create(request):
-	form = DepartmentForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		form = DepartmentForm()
-	context = {
-		'form':form
-	}
-	return render(request,'form/form.html',context)
+class EmployeeListView(ListView):
+    model = Employee
+    context_object_name = 'employee'
 
 
-def department_list(request):
-	department = Department.objects.all()
-	context = {
-		'department':department
-	}
-	return render(request,'department/department_list.html',context)
+class EmployeeCreateView(CreateView):
+    model = Employee
+    form_class = EmployeeForm
+    success_url = reverse_lazy('employee_changelist')
 
 
-def department_delete(request,id):
-	obj = get_object_or_404(Department,id=id)
-	if request.method == "POST":
-		obj.delete()
-		return redirect('department_list')
-	context = {
-		"objects":obj
-	}
-	#return render(request,'department/department_detete.html',context)
-	return render(request,'delete/delete.html',context)
+class EmployeeUpdateView(UpdateView):
+    model = Employee
+    form_class = EmployeeForm
+    success_url = reverse_lazy('employee_changelist')
 
 
-#
-# Team 
-#
+def load_designations(request):
+    department_id = request.GET.get('department')
+    designations = Designation.objects.filter(department_id=department_id).order_by('name')
+    return render(request, 'employee/designation_dropdown_list_options.html', {'designations': designations})
 
-def team_create(request):
-	form = DepartmentForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		form = DepartmentForm()
-	context = {
-		'form':form
-	}
-	return render(request,'form/form.html',context)
-
-
-def team_list(request):
-	team = Department.objects.all()
-	context = {
-		'team':team
-	}
-	return render(request,'team/department_list.html',context)
+# def department_create(request):
+# 	form = DepartmentForm(request.POST or None)
+# 	if form.is_valid():
+# 		form.save()
+# 		form = DepartmentForm()
+# 	context = {
+# 		'form':form
+# 	}
+# 	return render(request,'form/form.html',context)
 
 
-def team_delete(request,id):
-	obj = get_object_or_404(Department,id=id)
-	if request.method == "POST":
-		obj.delete()
-		return redirect('department_list')
-	context = {
-		"objects":obj
-	}
-	#return render(request,'team/department_detete.html',context)
-	return render(request,'delete/delete.html',context)
+# def department_list(request):
+# 	department = Department.objects.all()
+# 	context = {
+# 		'department':department
+# 	}
+# 	return render(request,'department/department_list.html',context)
 
 
-#
-# Section Site
-#
-
-def section_create(request):
-	form = SectionForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		form = DepartmentForm()
-	context = {
-		'form':form
-	}
-	return render(request,'form/form.html',context)
+# def department_delete(request,id):
+# 	obj = get_object_or_404(Department,id=id)
+# 	if request.method == "POST":
+# 		obj.delete()
+# 		return redirect('department_list')
+# 	context = {
+# 		"objects":obj
+# 	}
+# 	#return render(request,'department/department_detete.html',context)
+# 	return render(request,'delete/delete.html',context)
 
 
-def section_list(request):
-	section = Section.objects.all()
-	context = {
-		'section':section
-	}
-	return render(request,'section/section_list.html',context)
+# #
+# # Team 
+# #
+
+# def team_create(request):
+# 	form = DepartmentForm(request.POST or None)
+# 	if form.is_valid():
+# 		form.save()
+# 		form = DepartmentForm()
+# 	context = {
+# 		'form':form
+# 	}
+# 	return render(request,'form/form.html',context)
 
 
-def section_delete(request,id):
-	obj = get_object_or_404(Section,id=id)
-	if request.method == "POST":
-		obj.delete()
-		return redirect('section_list')
-	context = {
-		"objects":obj
-	}
-	return render(request,'delete/delete.html',context)
-
-	#return render(request,'section/section_detete.html',context)
-
-#
-#Designation site
-#
-
-def designation_create(request):
-	form = DesignationForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		form = DesignationForm()
-	context = {
-		'form':form
-	}
-	return render(request, 'form/form.html',context)
+# def team_list(request):
+# 	team = Department.objects.all()
+# 	context = {
+# 		'team':team
+# 	}
+# 	return render(request,'team/department_list.html',context)
 
 
-def designation_list(request):
-	designation = Designation.objects.all()
-	context = {
-		'designation':designation
-	}
-	return render(request,'designation/designation_list.html',context)
+# def team_delete(request,id):
+# 	obj = get_object_or_404(Department,id=id)
+# 	if request.method == "POST":
+# 		obj.delete()
+# 		return redirect('department_list')
+# 	context = {
+# 		"objects":obj
+# 	}
+# 	#return render(request,'team/department_detete.html',context)
+# 	return render(request,'delete/delete.html',context)
 
 
-def designation_delete(request,id):
-	obj = get_object_or_404(Designation,id=id)
-	if request.method == "POST":
-		obj.delete()
-		return redirect('../')
-	context = {
-		"objects":obj
-	}
-	return render(request,'delete/delete.html',context)
+# #
+# # Section Site
+# #
+
+# def section_create(request):
+# 	form = SectionForm(request.POST or None)
+# 	if form.is_valid():
+# 		form.save()
+# 		form = DepartmentForm()
+# 	context = {
+# 		'form':form
+# 	}
+# 	return render(request,'form/form.html',context)
+
+
+# def section_list(request):
+# 	section = Section.objects.all()
+# 	context = {
+# 		'section':section
+# 	}
+# 	return render(request,'section/section_list.html',context)
+
+
+# def section_delete(request,id):
+# 	obj = get_object_or_404(Section,id=id)
+# 	if request.method == "POST":
+# 		obj.delete()
+# 		return redirect('section_list')
+# 	context = {
+# 		"objects":obj
+# 	}
+# 	return render(request,'delete/delete.html',context)
+
+# 	#return render(request,'section/section_detete.html',context)
+
+# #
+# #Designation site
+# #
+
+# def designation_create(request):
+# 	form = DesignationForm(request.POST or None)
+# 	if form.is_valid():
+# 		form.save()
+# 		form = DesignationForm()
+# 	context = {
+# 		'form':form
+# 	}
+# 	return render(request, 'form/form.html',context)
+
+
+# def designation_list(request):
+# 	designation = Designation.objects.all()
+# 	context = {
+# 		'designation':designation
+# 	}
+# 	return render(request,'designation/designation_list.html',context)
+
+
+# def designation_delete(request,id):
+# 	obj = get_object_or_404(Designation,id=id)
+# 	if request.method == "POST":
+# 		obj.delete()
+# 		return redirect('../')
+# 	context = {
+# 		"objects":obj
+# 	}
+# 	return render(request,'delete/delete.html',context)
 
 	#return render(request,'designation/designation_delete.html',context)
 
@@ -166,32 +188,32 @@ def designation_delete(request,id):
 # 	}
 # 	return render(request,'form/form.html',context)
 
-def employee_create_view(request):
-    if request.method == 'POST':
-        form = EmployeeForm(request.POST)
-        if form.is_valid():
-            employee = form.save(commit=False)
-            # employee.user = request.user
-            employee.save()
-            return redirect('employee_list')
-    else:
-        form = EmployeeForm()
-    return render(request, 'form/form.html', {'form': form})
+# def employee_create_view(request):
+#     if request.method == 'POST':
+#         form = EmployeeForm(request.POST)
+#         if form.is_valid():
+#             employee = form.save(commit=False)
+#             # employee.user = request.user
+#             employee.save()
+#             return redirect('employee_list')
+#     else:
+#         form = EmployeeForm()
+#     return render(request, 'form/form.html', {'form': form})
 
 
 
-def employee_list(request):
-	all_employee = Employee.objects.all()
-	# department = Department.objects.all()
-	# section = Section.objects.all()
-	# designation = Designation.objects.all()
-	context = {
-		'all_employee':all_employee,
-		# 'department':department,
-		# 'section':section,
-		# 'designation':designation
-		}
-	return render(request,'employee_list.html',context)
+# def employee_list(request):
+# 	all_employee = Employee.objects.all()
+# 	# department = Department.objects.all()
+# 	# section = Section.objects.all()
+# 	# designation = Designation.objects.all()
+# 	context = {
+# 		'all_employee':all_employee,
+# 		# 'department':department,
+# 		# 'section':section,
+# 		# 'designation':designation
+# 		}
+# 	return render(request,'employee_list.html',context)
 
 
 # class EmployeeUpdateView(UpdateView):
@@ -201,20 +223,20 @@ def employee_list(request):
 # 	success_url = reverse_lazy('employee_list')
 
 
-def employee_detail(request,id):
-	employee = get_object_or_404(Employee,id=id)
-	context = {'employee':employee}
-	return render(request,'employee_details.html',context)
+# def employee_detail(request,id):
+# 	employee = get_object_or_404(Employee,id=id)
+# 	context = {'employee':employee}
+# 	return render(request,'employee_details.html',context)
 
-def employee_delete(request,id):
-	obj = get_object_or_404(Employee,id=id)
-	if request.method == "POST":
-		obj.delete()
-		return redirect('employee_list')
-	context = {
-		"objects":obj
-	}
-	return render(request,'delete/delete.html',context)
+# def employee_delete(request,id):
+# 	obj = get_object_or_404(Employee,id=id)
+# 	if request.method == "POST":
+# 		obj.delete()
+# 		return redirect('employee_list')
+# 	context = {
+# 		"objects":obj
+# 	}
+# 	return render(request,'delete/delete.html',context)
 
 	#return render(request,'employee_detete.html',context)
 

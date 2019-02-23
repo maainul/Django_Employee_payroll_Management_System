@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2>Employee Form</h2>
+
+  <form method="post" id="employeeForm" data-designations-url="{% url 'ajax_load_designations' %}" novalidate>
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit">Save</button>
+    <a href="{% url 'employee_changelist' %}">Nevermind</a>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_department").change(function () {
+      var url = $("#employeeForm").attr("data-designations-url");  // get the url of the `load_designations` view
+      var departmentId = $(this).val();  // get the selected department ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/employee/ajax/load-designations/)
+        data: {
+          'department': departmentId       // add the department id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_designations` view function
+          $("#id_designation").html(data);  // replace the contents of the designation input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}

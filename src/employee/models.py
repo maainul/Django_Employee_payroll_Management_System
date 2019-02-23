@@ -1,81 +1,85 @@
- # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.db import models
-from django.db.models import Manager
-from salary.models import Grade
-
-
-ATTENDANCE_STATUS = (
-		('A','Absent'),
-		('P','Present'),
-		('L','Leave'),
-		)
 
 class Department(models.Model):
-	dept_name = models.CharField(max_length=50)
-	
-	def __str__(self):
-		return self.dept_name
+    name = models.CharField(max_length=30)
 
-class Section(models.Model):
-	section_name = models.CharField(max_length=50)
-	
-	def __str__(self):
-		return self.section_name 
+    def __str__(self):
+        return self.name
 
 class Designation(models.Model):
-	designation_name = models.CharField(max_length=50)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
 
-	def __str__(self):
-		return self.designation_name 
-
-class Team(models.Model):
-	team_name = models.CharField(max_length=50)
-	
-	def __str__(self):
-		return self.team_name
-
-class Grade(models.Model):
-	grade_no = models.CharField(max_length=10,primary_key=True)
-	basic_salary = models.IntegerField()
-	medical_allowance = models.IntegerField()
-	lunch_allowance = models.IntegerField()
-	
-	def __str__(self):
-		return self.basic_salary
+    def __str__(self):
+        return self.name
 
 class Employee(models.Model):
-	name 				     = models.CharField(max_length=50)
-	father_name 		     = models.CharField(max_length=50)
-	mother_name 		     = models.CharField(max_length=50)
-	nid 				     = models.IntegerField()
-	present_address 	     = models.TextField(max_length=150)
-	permanent_address 	     = models.TextField(max_length=150)
-	phone 				     = models.IntegerField()
-	image         		     = models.ImageField(upload_to='employee/%Y/%m/%d', blank=True)
-	department 			     = models.ForeignKey(Department, on_delete=models.CASCADE,default=0,blank=True)
-	designation              = models.ForeignKey(Designation, on_delete=models.CASCADE,default=0,blank=True)
-	section     			 = models.ForeignKey(Section, on_delete=models.CASCADE,default=0,blank=True)
-	def __str__(self):
-		return self.name
+    name = models.CharField(max_length=100)
+    birthdate = models.DateField(null=True, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
+    designation = models.ForeignKey(Designation, on_delete=models.SET_NULL, null=True)
 
-
-class Salary(models.Model):
-    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
-    grade     = models.ForeignKey(Grade, on_delete=models.CASCADE, db_column='grade_no')
-    from_date = models.DateField(('from'))
-    to_date   = models.DateField(('to'))
     def __str__(self):
-    	return self.grade
+        return self.name
+
+# class Section(models.Model):
+#     section_name = models.CharField(max_length=50)
+    
+#     def __str__(self):
+#         return self.section_name 
+
+# class Team(models.Model):
+#     team_name = models.CharField(max_length=50)
+    
+#     def __str__(self):
+#         return self.team_name
+# class Salary(models.Model):
+#     employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+#     grade     = models.ForeignKey(Grade, on_delete=models.CASCADE, db_column='grade_no')
+#     from_date = models.DateField(('from'))
+#     to_date   = models.DateField(('to'))
+#     def __str__(self):
+#     	return self.grade
 
 
-class Attendance(models.Model):
-    employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
-    date = models.DateField(('attendance_date'))
-    attendance_status = models.CharField(choices=ATTENDANCE_STATUS,max_length=1)	
+
+# class Grade(models.Model):
+#     grade_no = models.CharField(max_length=10,primary_key=True)
+#     basic_salary = models.IntegerField()
+#     medical_allowance = models.IntegerField()
+#     lunch_allowance = models.IntegerField()
+    
+#     def __str__(self):
+#         return self.basic_salary
+
+
+
+# class Attendance(models.Model):
+#     employee  = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
+#     date = models.DateField(('attendance_date'))
+#     attendance_status = models.CharField(choices=ATTENDANCE_STATUS,max_length=1)	
 
 	#attendance_status = models.CharField(choices=ATTENDANCE_STATUS,max_length=1)
+
+# ATTENDANCE_STATUS = (
+# #       ('A','Absent'),
+# #       ('P','Present'),
+# #       ('L','Leave'),
+# #       )
+
+
+# class Designation(models.Model):
+#   designation_name = models.CharField(max_length=50)
+
+#   def __str__(self):
+#       return self.designation_name 
+
+
+# class Department(models.Model):
+#   dept_name = models.CharField(max_length=50)
+    
+#   def __str__(self):
+#       return self.dept_name
 
 
 # class Category(models.Model):
