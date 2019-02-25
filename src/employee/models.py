@@ -1,4 +1,9 @@
 from django.db import models
+role_choices = (
+    ("A","Absent"),
+    ("P","Present"),
+    ("L","Leave"),
+    )
 
 class Department(models.Model):
     name = models.CharField(max_length=30)
@@ -21,6 +26,15 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+
+class Attendance(models.Model):
+    employee = models.ForeignKey(Employee,on_delete=models.CASCADE,null=True)
+    date = models.DateField()
+    # status= models.CharField(max_length=1)
+    status= models.CharField(max_length=10,choices=role_choices,default="P")
+
+    def __str__(self):
+        return self.employee.name
 
 # class Section(models.Model):
 #     section_name = models.CharField(max_length=50)

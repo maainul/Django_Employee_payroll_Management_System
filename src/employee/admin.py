@@ -2,24 +2,70 @@ from django.contrib import admin
 from .models import (
 					Employee,
 					Department,
-					#Section,
+					Attendance,
 					Designation,
 					#Team,
 					#DepartmentAndDesignation,
 					#DepartmentAndSection,
 					#SectionAndTeam
 				)
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ('employee','date', 'status')
 
+
+admin.site.register(Attendance,AttendanceAdmin)
 admin.site.register(Employee)
 admin.site.register(Department)
-#admin.site.register(Section)
 admin.site.register(Designation)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #admin.site.register(Team)
 # admin.site.register(DepartmentAndSection)
 # admin.site.register(SectionAndTeam)
 
 
-
+#admin.site.register(Section)
 # Listing 11-2. Django admin list_display option
 
 # from django.contrib import admin

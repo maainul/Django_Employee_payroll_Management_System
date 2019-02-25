@@ -21,6 +21,9 @@ from . import views
 
 
 urlpatterns = [
+
+  path('alist/', views.AttdenceListView.as_view(), name='attendance_changelist'),
+  path('att/', views.AttendanceCreateView.as_view(), name='atten_add'),
   path('', views.EmployeeListView.as_view(), name='employee_changelist'),
   path('add/', views.EmployeeCreateView.as_view(), name='employee_add'),
   path('<int:pk>/', views.EmployeeUpdateView.as_view(), name='employee_change'),

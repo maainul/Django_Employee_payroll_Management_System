@@ -6,7 +6,7 @@ from .models import (
 			#Team,
 			#Grade,
 			Employee,
-			#Attendance,
+			Attendance,
 			#Salary,
 		)
 
@@ -32,6 +32,15 @@ class EmployeeForm(forms.ModelForm):
                 pass  # invalid input from the client; ignore and fallback to empty Designation queryset
         elif self.instance.pk:
             self.fields['designation'].queryset = self.instance.department.designation_set.order_by('name')
+
+
+class AttendanceForm(forms.ModelForm):
+    class Meta:
+        model = Attendance
+        fields = ('employee','date','status',)
+
+    def __init__(self,*args,**kwargs):
+        super(AttendanceForm,self).__init__(*args,**kwargs)
 # class EmployeeForm(forms.ModelForm):
 # 	class Meta:
 # 		model = Employee
