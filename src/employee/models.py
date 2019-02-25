@@ -32,9 +32,32 @@ class Attendance(models.Model):
     date = models.DateField()
     # status= models.CharField(max_length=1)
     status= models.CharField(max_length=10,choices=role_choices,default="P")
+    
 
     def __str__(self):
         return self.employee.name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # class Section(models.Model):
 #     section_name = models.CharField(max_length=50)
@@ -56,7 +79,11 @@ class Attendance(models.Model):
 #     	return self.grade
 
 
-
+# role_choices = (
+#     ("A","Absent"),
+#     ("P","Present"),
+#     ("L","Leave"),
+#     )
 # class Grade(models.Model):
 #     grade_no = models.CharField(max_length=10,primary_key=True)
 #     basic_salary = models.IntegerField()

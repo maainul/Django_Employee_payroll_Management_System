@@ -12,6 +12,7 @@
   <table border="1">
     <thead>
       <tr>
+        <th>Employee ID</th>
         <th>Name</th>
         <th>Birthdate</th>
         <th>Department</th>
@@ -21,6 +22,7 @@
     <tbody>
       {% for person in employee %}
         <tr>
+          <td>{{ person.id }}</td>
           <td><a href="{% url 'employee_change' person.pk %}">{{ person.name }}</a></td>
           <td>{{ person.birthdate }}</td>
           <td>{{ person.department.name }}</td>

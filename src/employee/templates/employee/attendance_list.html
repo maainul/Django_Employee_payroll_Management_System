@@ -10,8 +10,13 @@
   <table border="1">
     <thead>
       <tr>
+        <th>Serial Number</th>
+        <th>Employee ID</th>
         <th>Name</th>
+        <th>Department</th>
+        <th>Designation</th>
         <th>Date</th>
+
         <th>Status</th>
 
       </tr>
@@ -19,7 +24,12 @@
     <tbody>
       {% for person in attendance %}
         <tr>
+          <td>{{ person.id }}</td>
+          <td>{{ person.employee.id }}</td>
+
           <td>{{ person.employee.name }}</td>
+          <td>{{ person.employee.department }}</td>
+          <td>{{ person.employee.designation }}</td>
           <td>{{ person.date }}</td>
           <td>{{ person.status }}</td>
         </tr>
