@@ -52,6 +52,41 @@ class AttdenceListView(ListView):
     model = Attendance
     context_object_name = 'attendance'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 # def department_create(request):
 # 	form = DepartmentForm(request.POST or None)
 # 	if form.is_valid():

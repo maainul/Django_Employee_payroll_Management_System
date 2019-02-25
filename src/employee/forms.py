@@ -10,11 +10,6 @@ from .models import (
 			#Salary,
 		)
 
-#from django import forms
-#from .models import Employee, Designation
-
-#from django import forms
-
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
@@ -41,6 +36,48 @@ class AttendanceForm(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super(AttendanceForm,self).__init__(*args,**kwargs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # class EmployeeForm(forms.ModelForm):
 # 	class Meta:
 # 		model = Employee
